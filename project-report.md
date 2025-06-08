@@ -51,7 +51,7 @@ With more time, I would:
 
 TODO: Replace the image below with your own.
 
-![model_train_score.png](model_train_score.png)
+![model_train_score.png](model_test_score.png)
 
 ### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
 
