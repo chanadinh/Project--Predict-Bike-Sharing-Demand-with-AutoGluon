@@ -50,12 +50,12 @@ With more time, I would:
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
 
-![model_train_score.png](model_test_score.png)
+![model_train_score.png](img\model_test_score.png)
 
 ### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
 
 
-![model_test_score1.png](model_test_score1.png)
+![model_test_score1.png](img\model_test_score1.png)
 
 ## Summary
 This project demonstrates how AutoGluon can be used to rapidly prototype and optimize models on real-world problems like predicting bike sharing demand. Through iterative modeling, feature engineering, and hyperparameter tuning, I improved the model's RMSLE score significantly. This approach can be generalized to similar demand forecasting problems in domains like transportation, logistics, or food delivery.
