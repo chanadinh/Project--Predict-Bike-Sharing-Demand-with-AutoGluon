@@ -27,8 +27,17 @@ Even though performance didn't improve, this experiment was still valuable—it 
 
 ## Hyper parameter tuning
 ### How much better did your model preform after trying different hyper parameters?
-After tuning hyperparameters using AutoGluon’s hyperparameter_tune_kwargs='auto' with the best_quality preset, the model improved further, reaching a Kaggle score of approximately 0.53071. This tuning helped the model optimize learning rates, number of estimators, and ensemble stacking across multiple algorithms.
+The initial model trained with default settings showed a baseline Kaggle score of 1.75733. Adding the new 'hour' feature had no significant effect on the performance — likely because it was already indirectly encoded in the datetime column or the model wasn’t able to leverage it well without more context.
 
+After introducing hyperparameter tuning:
+
+- `num_leaves=36` in the LightGBM model allowed the trees to capture more complex patterns, leading to better fit on nonlinear relationships.
+
+- `dropout=0.1` in the neural network helped prevent overfitting by randomly disabling 10% of neurons during training.
+
+- `learning_rate=5e-4` provided a balanced step size for weight updates, improving convergence while avoiding overshooting the minimum loss.
+
+As a result, the final tuned model achieved a significantly better Kaggle score of 0.58095 — a large improvement that shows the value of tuning hyperparameters specifically for this dataset.
 ### If you were given more time with this dataset, where do you think you would spend more time?
 With more time, I would:
 
@@ -43,9 +52,9 @@ With more time, I would:
 ### Create a table with the models you ran, the hyperparameters modified, and the kaggle score.
 |model|hpo1|hpo2|hpo3|score|
 |--|--|--|--|--|
-|initial|default|-|-|1.75733|
-|add_features|default|added more features|-|1.75733|
-|hpo|presets=best_quality|time_limit=600|hyperparameter_tune_kwargs='auto'|0.53071|
+|initial|default|-|-|1.80284|
+|add_features|default|added more features|-|1.80284|
+|hpo|num_leaves=36|dropout=0.1|lr=5e-4|0.52781|
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
@@ -55,7 +64,7 @@ With more time, I would:
 ### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
 
 
-![model_test_score1.png](img/model_test_score1.png)
+![model_test_score1.png](img/kaggle_score_per_model.png)
 
 ## Summary
 This project demonstrates how AutoGluon can be used to rapidly prototype and optimize models on real-world problems like predicting bike sharing demand. Through iterative modeling, feature engineering, and hyperparameter tuning, I improved the model's RMSLE score significantly. This approach can be generalized to similar demand forecasting problems in domains like transportation, logistics, or food delivery.
