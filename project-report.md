@@ -13,17 +13,17 @@ The top-ranked model was WeightedEnsemble_L3, which combines predictions from mu
 The analysis of the datetime column revealed patterns by hour that aligned with commute and work hours. I extracted the hour from the datetime, and later categorized time periods into rush_hour_blocks (morning, lunch, evening). I also bucketed continuous variables like temp, humidity, and windspeed into descriptive bins (hot, cold, humid, windy) for better model interpretation.
 
 ### How much better did your model preform after adding additional features and why do you think that is?
-After adding additional features—including converting numeric values of season and weather to categorical labels and creating a temp_category feature—the model's Kaggle score did not improve. The score remained at 1.75733, the same as the initial baseline.
+After feature engineering, the model improved significantly. The Kaggle score dropped from 1.74953 in the baseline to 0.50468 with the added features. This boost is likely because the newly engineered features helped expose clear patterns in the data.
 
-There are a few possible reasons for this:
+- `Hour` helped capture daily usage patterns, like morning and evening rush hours.
 
-- Redundancy: The original numerical features (like temperature) already provided sufficient information. The new features may have been redundant or not distinctive enough to add value.
+- `Temp category` grouped temperatures into understandable weather ranges, helping the model capture nonlinear effects.
 
-- Feature quality: While temp_category grouped temperature into ranges, the actual numeric values may have held more precise predictive power than broad categories.
+- `Mapped categorical features` for season and weather allowed the model to treat them as meaningful groups instead of raw numbers.
 
-- Model robustness: AutoGluon’s default models are quite powerful and may already be extracting patterns effectively from the raw data, especially with boosted ensembles and neural networks.
+These changes made the dataset more interpretable for AutoGluon, improving model performance.
 
-Even though performance didn't improve, this experiment was still valuable—it confirms that not all feature engineering leads to better results, and emphasizes the importance of validating each change through testing.
+
 
 ## Hyper parameter tuning
 ### How much better did your model preform after trying different hyper parameters?
@@ -52,9 +52,9 @@ With more time, I would:
 ### Create a table with the models you ran, the hyperparameters modified, and the kaggle score.
 |model|hpo1|hpo2|hpo3|score|
 |--|--|--|--|--|
-|initial|default|-|-|1.80284|
-|add_features|default|added more features|-|1.80284|
-|hpo|num_leaves=36|dropout=0.1|lr=5e-4|0.52781|
+|initial|default|-|-|1.74953|
+|add_features|default|added more features|-|0.50468|
+|hpo|num_leaves=36|dropout=0.1|lr=5e-4|0.46664|
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
